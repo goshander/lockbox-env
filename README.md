@@ -21,7 +21,10 @@ require('lockbox-env').config({
     iamEndpoint, // optional, override Yandex Cloud IAM api endpoint
     lockboxEndpoint, // optional, override Yandex Cloud Lockbox api endpoint
     /* WIP */ folderId: '', // optional, Yandex Cloud project folder-id for auto load secrets by main project name, also can be specify by env variable (see below)
-})
+}) // return promise
+
+// also you can use sync version
+require('lockbox-env').configSync(...)
 ```
 
 ### Environment variable
