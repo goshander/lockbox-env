@@ -1,0 +1,14 @@
+.vscode/*
+!.vscode/launch.json
+
+.idea
+
+.directory
+
+node_modules
+.nyc_output
+.DS_Store
+.npmrc
+
+.env
+*.sa.json

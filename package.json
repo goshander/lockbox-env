@@ -1,0 +1,33 @@
+{
+  "name": "lockbox-env",
+  "version": "1.0.0",
+  "description": "Yandex Cloud Lockbox secrets to environment variables init utility",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./main.js",
+    "test": "tap ./*.test.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.1.2",
+    "node-jose": "^2.1.1",
+    "pino": "^8.6.1",
+    "synchronized-promise": "^0.3.1"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.3",
+    "eslint": "^8.25.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.0.1",
+    "nodemon": "^2.0.20",
+    "pino-pretty": "^9.1.1",
+    "tap": "^16.3.0"
+  },
+  "optionalDependencies": {
+    "fsevents": "^2.3.2"
+  }
+}
