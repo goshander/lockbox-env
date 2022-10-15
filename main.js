@@ -52,6 +52,10 @@ const config = async ({
   lockboxEndpoint,
   folderId,
 } = { }) => {
+  if (process.env.LOCKBOX_SECRET_ID) {
+    secrets = process.env.LOCKBOX_SECRET_ID
+  }
+
   let secretList = (typeof secrets === 'string' || secrets instanceof String) ? [secrets] : secrets
 
   if (logger == null) {
