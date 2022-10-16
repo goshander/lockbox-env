@@ -56,7 +56,7 @@ const getSecretPayload = async (
     },
   })
   if (secretResponse.status !== 200) {
-    if (logger) logger.warn({ msg: 'lockbox-env value cleared after first time read', status: secretResponse.status })
+    if (logger) logger.warn({ msg: 'lockbox-env error read secret payload', status: secretResponse.status })
     return []
   }
 
@@ -72,19 +72,29 @@ const getSecretIdByPackage = async (
   apiToken,
   { logger, lockboxEndpoint = 'lockbox.api.cloud.yandex.net' } = { lockboxEndpoint: 'lockbox.api.cloud.yandex.net' },
 ) => {
-  const pkgName = 'imap-mail'
+  const path = require('path')
 
-  const listResponse = await axios.get(`https://${lockboxEndpoint}/lockbox/v1/secrets?folderId=${folderId}`, {
+  const pkgName = require(path.join(require.main ? path.dirname(require.main.filename) : __dirname, 'package.json')).name
+
+  const folderFilter = folderId ? `?folderId=${folderId}` : ''
+
+  const listResponse = await axios.get(`https://${lockboxEndpoint}/lockbox/v1/secrets${folderFilter}`, {
     headers: {
       Authorization: `Bearer ${apiToken}`,
     },
   })
+
   if (listResponse.status !== 200) {
     if (logger) logger.warn({ msg: 'lockbox-env get pkg name secret error', status: listResponse.status })
     return null
   }
 
-  return (listResponse.data.secrets.find((secret) => secret.name === pkgName) || {}).id
+  const environment = process.env.NODE_ENV
+
+  return (listResponse.data.secrets
+    .filter((secret) => secret.name === pkgName || secret.name === `${pkgName}-${environment}`))
+    .sort((a, b) => a > b)
+    .map((secret) => secret.id)
 }
 
 module.exports = { getToken, getSecretPayload, getSecretIdByPackage }

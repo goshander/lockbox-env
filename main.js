@@ -55,6 +55,9 @@ const config = async ({
   if (process.env.LOCKBOX_SECRET_ID) {
     secrets = process.env.LOCKBOX_SECRET_ID
   }
+  if (process.env.LOCKBOX_FOLDER_ID) {
+    folderId = process.env.LOCKBOX_FOLDER_ID
+  }
 
   let secretList = (typeof secrets === 'string' || secrets instanceof String) ? [secrets] : secrets
 
@@ -74,10 +77,9 @@ const config = async ({
 
   const apiToken = await getToken({ iamToken, saKeyFile, iamEndpoint })
   if (folderId != null && (secretList == null || secretList.length < 1 || secretList[0] == null)) {
-    const secretId = await getSecretIdByPackage(folderId, apiToken, {
+    secretList = await getSecretIdByPackage(folderId, apiToken, {
       logger, lockboxEndpoint,
     })
-    secretList = [secretId]
   }
 
   for (let i = 0; i < secretList.length; i += 1) {

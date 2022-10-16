@@ -4,6 +4,7 @@
   "description": "Yandex Cloud Lockbox secrets to environment variables init utility",
   "main": "main.js",
   "scripts": {
+    "start": "node -e \"require('./main.js').config()\"",
     "dev": "nodemon ./main.js",
     "test": "tap ./*.test.js"
   },
