@@ -8,7 +8,6 @@
 node_modules
 .nyc_output
 .DS_Store
-.npmrc
 
 .env
 *.sa.json

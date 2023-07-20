@@ -8,6 +8,9 @@
     "dev": "nodemon ./main.js",
     "test": "tap ./*.test.js"
   },
+  "repository": {
+    "url": "https://github.com/goshander/lockbox-env"
+  },
   "author": {
     "email": "i@64mb.ru",
     "name": "Georgiy Malkov",
